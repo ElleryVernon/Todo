@@ -70,6 +70,7 @@ const Demo = () => {
 		const newTasks = tasks.filter((task) => task.id !== id);
 		setTasks(newTasks);
 	};
+	
 	return (
 		<Container>
 			<TaskInput
@@ -82,9 +83,9 @@ const Demo = () => {
 			<Heading>Working 🔥</Heading>
 			{tasks
 				.filter((task) => !task.isDone)
-				.map((task, idx) => (
+				.map((task) => (
 					<TaskCard
-						key={idx}
+						key={task.id}
 						task={task}
 						onToggleIsDone={() => toggleIsDone(task.id)}
 						onDelete={() => deleteTask(task.id)}

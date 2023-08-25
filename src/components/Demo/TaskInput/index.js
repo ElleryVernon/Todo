@@ -8,44 +8,44 @@ const InputContainer = styled.div`
 	background-color: white;
 	color: #4a5568;
 	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-	border: 1px solid #cbd5e0; /* border-neutral-400 */
-	font-weight: 500; /* font-medium */
-	padding-top: 8px; /* py-2 */
+	border: 1px solid #cbd5e0;
+	font-weight: 500;
+	padding-top: 8px;
 	padding-bottom: 8px;
-	padding-right: 8px; /* pr-2 */
+	padding-right: 8px;
 	padding-left: 8px;
 `;
 
 const Input = styled.input`
 	width: 100%;
-	margin-left: 8px; /* ml-2 */
-	font-size: 15px; /* text-[15px] */
-	color: #2d3748; /* text-neutral-900 */
-	font-weight: 500; /* font-medium */
+	margin-left: 8px;
+	font-size: 15px;
+	color: #2d3748;
+	font-weight: 500;
 	outline: none;
-	margin-right: 8px; /* mr-2 */
+	margin-right: 8px;
 	border: none;
 
 	&::placeholder {
-		font-size: 15px; /* placeholder:text-[15px] */
-		color: #a0aec0; /* placeholder */
+		font-size: 15px;
+		color: #a0aec0;
 	}
 `;
 
 const SubmitButton = styled.button`
-	border: 1px solid #cbd5e0; /* border-neutral-400 */
+	border: 1px solid #cbd5e0;
 	background-color: white;
 	padding-left: 8px;
-	padding-right: 8px; /* px-2 */
+	padding-right: 8px;
 	padding-top: 8px;
 	padding-bottom: 6px;
-	border-radius: 6px; /* rounded-lg */
+	border-radius: 6px;
 	cursor: pointer;
 `;
 
 const SubmitIcon = styled(GoPaperAirplane)`
-	font-size: 16px; /* size 16 */
-	color: #a0aec0; /* text-neutral-400 */
+	font-size: 16px;
+	color: #a0aec0;
 `;
 
 const TaskInput = ({
