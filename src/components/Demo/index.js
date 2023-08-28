@@ -4,6 +4,8 @@ import { createId } from "@paralleldrive/cuid2";
 import TaskCard from "./TaskCard";
 import TaskInput from "./TaskInput";
 import { toast } from "sonner";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 const Container = styled.div`
 	padding: 20px;
@@ -33,9 +35,17 @@ const Demo = () => {
 			isDone: true,
 		},
 	]);
-
 	const [newTaskTitle, setNewTaskTitle] = useState("");
 	const [newTaskDescription, setNewTaskDescription] = useState("");
+	const [showConfetti, setShowConfetti] = useState(false);
+
+	const { width, height } = useWindowSize();
+
+	const handleConfetti = (title) => {
+		toast.success(`🎉 ${title} 완료!`);
+		setShowConfetti(true);
+		setTimeout(() => setShowConfetti(false), 4250);
+	};
 
 	const toggleIsDone = (id) => {
 		const newTasks = tasks.map((task) => {
@@ -72,37 +82,50 @@ const Demo = () => {
 	};
 
 	return (
-		<Container>
-			<TaskInput
-				newTaskTitle={newTaskTitle}
-				setNewTaskTitle={setNewTaskTitle}
-				newTaskDescription={newTaskDescription}
-				setNewTaskDescription={setNewTaskDescription}
-				addNewTask={addNewTask}
-			/>
-			<Heading>Working 🔥</Heading>
-			{tasks
-				.filter((task) => !task.isDone)
-				.map((task) => (
-					<TaskCard
-						key={task.id}
-						task={task}
-						onToggleIsDone={() => toggleIsDone(task.id)}
-						onDelete={() => deleteTask(task.id)}
-					/>
-				))}
-			<Heading>Done..! 🎉</Heading>
-			{tasks
-				.filter((task) => task.isDone)
-				.map((task, idx) => (
-					<TaskCard
-						key={idx}
-						task={task}
-						onToggleIsDone={() => toggleIsDone(task.id)}
-						onDelete={() => deleteTask(task.id)}
-					/>
-				))}
-		</Container>
+		<React.Fragment>
+			{showConfetti && (
+				<Confetti
+					width={width}
+					height={height - 64}
+					numberOfPieces={300}
+					wind={0.01}
+					gravity={0.15}
+				/>
+			)}
+			<Container>
+				<TaskInput
+					newTaskTitle={newTaskTitle}
+					setNewTaskTitle={setNewTaskTitle}
+					newTaskDescription={newTaskDescription}
+					setNewTaskDescription={setNewTaskDescription}
+					addNewTask={addNewTask}
+				/>
+				<Heading>Working 🔥</Heading>
+				{tasks
+					.filter((task) => !task.isDone)
+					.map((task) => (
+						<TaskCard
+							key={task.id}
+							task={task}
+							onToggleIsDone={() => toggleIsDone(task.id)}
+							onDelete={() => deleteTask(task.id)}
+							handleConfetti={handleConfetti}
+						/>
+					))}
+				<Heading>Done..! 🎉</Heading>
+				{tasks
+					.filter((task) => task.isDone)
+					.map((task, idx) => (
+						<TaskCard
+							key={idx}
+							task={task}
+							onToggleIsDone={() => toggleIsDone(task.id)}
+							onDelete={() => deleteTask(task.id)}
+							handleConfetti={handleConfetti}
+						/>
+					))}
+			</Container>
+		</React.Fragment>
 	);
 };
 

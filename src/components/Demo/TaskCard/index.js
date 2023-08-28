@@ -31,18 +31,30 @@ const Button = styled.button`
 	transition: background-color 0.3s;
 `;
 
-const TaskCard = ({ task, onToggleIsDone, onDelete }) => (
-	<TaskCardContainer>
-		<div>
-			<strong>{task.title}</strong> {task.description}
-		</div>
-		<div>
-			<Button onClick={onToggleIsDone}>{task.isDone ? "⛔️ 취소하기" : "✅ 완료하기"}</Button>
-			<Button danger onClick={onDelete}>
-				🗑️ 삭제
-			</Button>
-		</div>
-	</TaskCardContainer>
-);
+const TaskCard = ({ task, onToggleIsDone, onDelete, handleConfetti }) => {
+	const handleOnClick = (task) => {
+		if (!task.isDone) {
+			handleConfetti(task.title);
+		}
+
+		onToggleIsDone();
+	};
+
+	return (
+		<TaskCardContainer>
+			<div>
+				<strong>{task.title}</strong> {task.description}
+			</div>
+			<div>
+				<Button onClick={() => handleOnClick(task)}>
+					{task.isDone ? "⛔️ 취소하기" : "✅ 완료하기"}
+				</Button>
+				<Button danger onClick={onDelete}>
+					🗑️ 삭제
+				</Button>
+			</div>
+		</TaskCardContainer>
+	);
+};
 
 export default TaskCard;
