@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
+import { createId } from "@paralleldrive/cuid2";
 import TaskCard from "./TaskCard";
 import TaskInput from "./TaskInput";
 import { toast } from "sonner";
@@ -21,13 +21,13 @@ const Heading = styled.div`
 const Demo = () => {
 	const [tasks, setTasks] = useState([
 		{
-			id: "0000",
+			id: "clluefel0000008lcaf5mgrn6",
 			title: "리액트 공부하기",
 			description: "리액트 기초를 공부해봅시다.",
 			isDone: false,
 		},
 		{
-			id: "1111",
+			id: "cllueflvw000208lce4mr7929",
 			title: "리액트 공부하기",
 			description: "리액트 기초를 공부해봅시다.",
 			isDone: true,
@@ -55,7 +55,7 @@ const Demo = () => {
 		}
 
 		const newTask = {
-			id: uuidv4(),
+			id: createId(),
 			title: newTaskTitle,
 			description: newTaskDescription,
 			isDone: false,
@@ -70,7 +70,7 @@ const Demo = () => {
 		const newTasks = tasks.filter((task) => task.id !== id);
 		setTasks(newTasks);
 	};
-	
+
 	return (
 		<Container>
 			<TaskInput
